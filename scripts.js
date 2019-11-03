@@ -48,7 +48,8 @@ const keysNum = [
 class Keyboard {
 	constructor (language, isShifted) {
 		this.language = language;
-		this.option = isShifted ? 'shift' : 'default';
+		this.isShifted = isShifted;
+		this.option = this.isShifted ? 'shift' : 'default';
 		this.layout = [...layout[this.language][this.option]];
 		this.keyboard = document.createElement('div');
 		this.keyboard.className = 'keyboard';
@@ -76,12 +77,15 @@ class Keyboard {
 		return;
 	}
 
-	language() {
-
+	changeLanguage() {
+		this.language = this.language === 'rus' ? 'eng' : 'rus';
+		this.changeLayout(this.language, this.isShifted);
+		localStorage.setItem('language', this.language);
 	}
 
 	changeLayout(language, isShifted) {
-		this.option = isShifted ? 'shift' : 'default';
+		this.isShifted = isShifted;
+		this.option = this.isShifted ? 'shift' : 'default';
 		this.language = language;
 		this.layout = [...layout[this.language][this.option]];
 		let keys = document.querySelectorAll('.key');
@@ -127,15 +131,46 @@ window.onload = function() {
 
 document.body.addEventListener('click', function(event) {
 	if (event.target.classList.contains('key')) {
+		const allKeys = document.querySelectorAll('.key');
+
 		switch (event.target.innerHTML) {
 			case 'Shift':
-				event.target.classList.toggle('active');
-				keyboard.shift();
+				if (allKeys[keysCode.indexOf('ShiftLeft')].classList.contains('active') || allKeys[keysCode.indexOf('ShiftRight')].classList.contains('active')) {
+						allKeys[keysCode.indexOf('ShiftLeft')].classList.remove('active');
+						allKeys[keysCode.indexOf('ShiftRight')].classList.remove('active');
+						keyboard.shift();
+				} else {
+					event.target.classList.add('active');
+					keyboard.shift();
+				}
 				break;
 			
+			case 'Ctrl':
+				if (allKeys[keysCode.indexOf('ShiftLeft')].classList.contains('active') || allKeys[keysCode.indexOf('ShiftRight')].classList.contains('active')) {
+					allKeys[keysCode.indexOf('ShiftLeft')].classList.remove('active');
+					allKeys[keysCode.indexOf('ShiftRight')].classList.remove('active');
+					keyboard.shift();
+					keyboard.changeLanguage();
+				}
+				event.target.style.animation = '';
+				void event.target.offsetWidth;
+				event.target.style.animation = 'active 0.3s linear';
+				break;
+
+			case 'Alt':
+				if (allKeys[keysCode.indexOf('ShiftLeft')].classList.contains('active') || allKeys[keysCode.indexOf('ShiftRight')].classList.contains('active')) {
+					allKeys[keysCode.indexOf('ShiftLeft')].classList.remove('active');
+					allKeys[keysCode.indexOf('ShiftRight')].classList.remove('active');
+					keyboard.shift();
+					keyboard.changeLanguage();
+				}
+				event.target.style.animation = '';
+				void event.target.offsetWidth;
+				event.target.style.animation = 'active 0.3s linear';
+				break;
+
 			default:
 				document.getElementsByTagName('textarea')[0].value += event.target.innerHTML;
-				const allKeys = document.querySelectorAll('.key');
 				if (allKeys[keysCode.indexOf('ShiftLeft')].classList.contains('active') || allKeys[keysCode.indexOf('ShiftRight')].classList.contains('active')) {
 					allKeys[keysCode.indexOf('ShiftLeft')].classList.remove('active');
 					allKeys[keysCode.indexOf('ShiftRight')].classList.remove('active');
@@ -144,6 +179,7 @@ document.body.addEventListener('click', function(event) {
 				event.target.style.animation = '';
 				void event.target.offsetWidth;
 				event.target.style.animation = 'active 0.3s linear';
+				break;
 		}
 		
 	}
