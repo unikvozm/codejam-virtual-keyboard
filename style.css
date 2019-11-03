@@ -2,7 +2,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 73.1%;
   background: white;
   -webkit-box-shadow: 0px 16px 18px 6px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0px 16px 18px 6px rgba(0, 0, 0, 0.22);
@@ -33,21 +33,22 @@
 }
 
 body > div > div:nth-child(1) > div:nth-child(14) {
-	width: 9.9%;
+	width: 13.1%;
 	font-size: 1vw;
 	text-align: right;
 	padding-right: 1%;
 }
 
 body > div > div:nth-child(2) > div:nth-child(1) {
-	width: 8.3%;
 	font-size: 1vw;
 	text-align: left;
 	padding-left: 1%;
 }
 
-body > div > div:nth-child(2) > div:nth-child(14) {
-	width: 8.3%;
+body > div > div:nth-child(2) > div:nth-child(15) {
+	font-size: 1vw;
+	text-align: right;
+	padding-right: 1%;
 }
 
 body > div > div:nth-child(3) > div:nth-child(1) {
@@ -58,21 +59,21 @@ body > div > div:nth-child(3) > div:nth-child(1) {
 }
 
 body > div > div:nth-child(3) > div:nth-child(13) {
-	width: 12.5%;
+	width: 15.1%;
 	font-size: 1vw;
 	text-align: right;
 	padding-right: 1%;
 }
 
 body > div > div:nth-child(4) > div:nth-child(1) {
-	width: 7%;
+	width: 9%;
 	font-size: 1vw;
 	text-align: left;
 	padding-left: 1%;
 }
 
 body > div > div:nth-child(4) > div:nth-child(13) {
-	width: 13.9%;
+	width: 15.1%;
 	font-size: 1vw;
 	text-align: right;
 	padding-right: 1%;
@@ -86,7 +87,7 @@ body > div > div:nth-child(5) > div:nth-child(1) {
 }
 
 body > div > div:nth-child(5) > div:nth-child(9) {
-	width: 7%;
+	width: 8.3%;
 	font-size: 1vw;
 	text-align: right;
 	padding-right: 1%;
@@ -101,4 +102,23 @@ body > div > div:nth-child(5) > div:nth-child(5) {
 body > div > div:nth-child(5) > div:nth-child(4) {
 	width: 40%;
 	font-size: 1vw;
+}
+
+textarea {
+	width: 78%;
+	margin: 0 auto;
+	height: 20vh;
+	overflow-y: scroll;
+	margin-left: 11vw;
+	font-family: 'Noto Serif', serif;
+	font-size: 1.5vw;
+	-webkit-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.22);
+	box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.22);
+}
+
+.active {
+	background: #05acff;
+	border-radius: 20%;
+
 }
