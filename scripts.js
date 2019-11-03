@@ -103,15 +103,19 @@ class Keyboard {
 
 let language;
 if (localStorage.getItem('language') === null) {
-	language = navigator.language.inclused('ru') ? 'rus' : 'eng';
+	language = navigator.language.includes('ru') ? 'rus' : 'eng';
 	localStorage.setItem('language', language);
 }
 else language = localStorage.getItem('language');
 let isShifted = false;
 let keyboard = new Keyboard(language, isShifted);
 
+let textarea = document.createElement('TEXTAREA');
+textarea.value = '';
+
 window.onload = function() {
-	document.body.append(document.createElement('TEXTAREA'));
+	document.body.append(textarea);
+	
 	let language;
 	if (window.localStorage.getItem('language') === null) {
 		language = navigator.language.includes('ru') ? 'rus' : 'eng';
@@ -123,10 +127,25 @@ window.onload = function() {
 
 document.body.addEventListener('click', function(event) {
 	if (event.target.classList.contains('key')) {
-		if (event.target.innerHTML === 'Shift') {
-			event.target.classList.toggle('active');
-			keyboard.shift();
+		switch (event.target.innerHTML) {
+			case 'Shift':
+				event.target.classList.toggle('active');
+				keyboard.shift();
+				break;
+			
+			default:
+				document.getElementsByTagName('textarea')[0].value += event.target.innerHTML;
+				const allKeys = document.querySelectorAll('.key');
+				if (allKeys[keysCode.indexOf('ShiftLeft')].classList.contains('active') || allKeys[keysCode.indexOf('ShiftRight')].classList.contains('active')) {
+					allKeys[keysCode.indexOf('ShiftLeft')].classList.remove('active');
+					allKeys[keysCode.indexOf('ShiftRight')].classList.remove('active');
+					keyboard.shift();
+				}
+				event.target.style.animation = '';
+				void event.target.offsetWidth;
+				event.target.style.animation = 'active 0.3s linear';
 		}
+		
 	}
 });
 

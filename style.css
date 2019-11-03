@@ -119,6 +119,10 @@ textarea {
 
 .active {
 	background: #05acff;
-	border-radius: 20%;
-
 }
+
+@keyframes active {
+	from {background-color: grey;}
+	50% {background: #05acff;}
+	to {background: grey;}
+	}
