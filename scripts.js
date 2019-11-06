@@ -80,7 +80,7 @@ class Keyboard {
 	constructor () {
 		if (localStorage.getItem('language') === null) {
 			this.language = navigator.language.includes('ru') ? 'rus' : 'eng';
-			localStorage.setItem('language', language);
+			localStorage.setItem('language', this.language);
 		}
 		else this.language = localStorage.getItem('language');
 		this.isShifted = false;
@@ -264,8 +264,6 @@ document.body.addEventListener('click', function(event) {
 			case '∧':
 				if (keyboard.isShifted) keyboard.shiftHandler();
 				addAnimation(event.target);
-				//textarea.setSelectionRange(textarea.selectionStart - 97, textarea.selectionStart - 97);
-				//textarea.focus();
 				//TODO:
 				break;
 			
@@ -304,7 +302,7 @@ document.body.addEventListener('keydown', function(event) {
 	const textarea = document.getElementsByTagName('textarea')[0];
 	textarea.focus();
 	event.preventDefault();
-	console.log(event.code);
+	let cursorStart;
 	switch (event.code) {
 		case 'ShiftLeft':
 		case 'ShiftRight':
