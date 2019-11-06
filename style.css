@@ -108,7 +108,7 @@ body > div > div:nth-child(5) > div:nth-child(4) {
   font-size: 1vw;
 }
 
-textarea {
+.textarea {
   width: 78%;
   margin: 0 auto;
   height: 20vh;
