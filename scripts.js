@@ -298,3 +298,119 @@ document.body.addEventListener('click', function(event) {
 		}
 	}
 });
+
+
+document.body.addEventListener('keydown', function(event) {
+	const textarea = document.getElementsByTagName('textarea')[0];
+	textarea.focus();
+	event.preventDefault();
+	console.log(event.code);
+	switch (event.code) {
+		case 'ShiftLeft':
+		case 'ShiftRight':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			else {
+				keyboard.keys[keysCode.indexOf(event.code)].classList.add('active');
+				keyboard.shift();
+			}
+			break;
+		
+		case 'ControlLeft':
+		case 'ControlRight':
+		case 'AltLeft':
+		case 'AltRight':
+			keyboard.ctrlHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			break;
+
+		case 'MetaLeft':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			break;
+		
+		case 'Space':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			textarea.value += ' ';
+			break;
+
+		case 'Tab':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			textarea.value += '\t';
+			break;
+		
+		case 'CapsLock':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			keyboard.capsHandler();
+			break;
+		
+		case 'Backspace':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			cursorStart = textarea.selectionStart;
+			if (textarea.selectionStart === textarea.selectionEnd) {
+				textarea.value = textarea.value.slice(0, textarea.selectionStart - 1) + textarea.value.slice(textarea.selectionEnd);
+				textarea.selectionStart = cursorStart--;
+				textarea.selectionEnd = cursorStart--;
+			} else {
+				textarea.value = textarea.value.slice(0, textarea.selectionStart) + textarea.value.slice(textarea.selectionEnd);
+				textarea.selectionStart = cursorStart;
+				textarea.selectionEnd = cursorStart;
+			}
+			break;
+		
+		case 'Enter':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			textarea.value += '\n';
+			break;
+		
+		case 'Delete':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			cursorStart = textarea.selectionStart;
+			if (textarea.selectionStart === textarea.selectionEnd) {
+				textarea.value = textarea.value.slice(0, textarea.selectionStart) + textarea.value.slice(textarea.selectionEnd + 1);
+			} else {
+				textarea.value = textarea.value.slice(0, textarea.selectionStart) + textarea.value.slice(textarea.selectionEnd);
+			}
+			textarea.selectionStart = cursorStart;
+			textarea.selectionEnd = cursorStart;
+			break;
+		
+		case 'ArrowUp':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			//TODO:
+			break;
+		
+		case 'ArrowDown':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			//TODO:
+			break;
+		
+		case 'ArrowLeft': 
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			textarea.selectionStart--;
+			textarea.selectionEnd--;
+			textarea.focus();
+			break;
+
+		case 'ArrowRight':
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			textarea.selectionStart++;
+			textarea.focus();
+			break;
+
+		default:
+			textarea.value += keyboard.keys[keysCode.indexOf(event.code)].innerHTML;
+			if (keyboard.isShifted) keyboard.shiftHandler();
+			addAnimation(keyboard.keys[keysCode.indexOf(event.code)]);
+			break;
+	}
+});
