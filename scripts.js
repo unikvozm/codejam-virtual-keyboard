@@ -180,7 +180,7 @@ window.onload = function() {
 function addAnimation(element) {
 	element.style.animation = '';
 	void element.offsetWidth;
-	element.style.animation = 'active 0.3s linear';
+	element.style.animation = 'active 0.5s linear';
 }
 
 document.body.addEventListener('click', function(event) {
@@ -303,6 +303,7 @@ document.body.addEventListener('keydown', function(event) {
 	textarea.focus();
 	event.preventDefault();
 	let cursorStart;
+
 	switch (event.code) {
 		case 'ShiftLeft':
 		case 'ShiftRight':

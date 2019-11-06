@@ -32,10 +32,6 @@
 	transition: all ease 0.3s;
 }
 
-.key:active {
-	box-shadow: 0 0 0 0 rgba(179, 170, 179, 1);
-}
-
 body > div > div:nth-child(1) > div:nth-child(14) {
   width: 13.1%;
   font-size: 1vw;
@@ -122,7 +118,8 @@ body > div > div:nth-child(5) > div:nth-child(4) {
 }
 
 .active {
-  background: #05acff;
+	background: #05acff;
+	box-shadow: 0 0 0 0 rgba(179, 170, 179, 1);
 }
 
 @keyframes active {
@@ -130,7 +127,9 @@ body > div > div:nth-child(5) > div:nth-child(4) {
     background-color: grey;
   }
   50% {
-    background: #05acff;
+		box-shadow: 0 0 0 0 rgba(179, 170, 179, 1);
+		background: #05acff;
+		
   }
   to {
     background: grey;
